@@ -1,0 +1,24 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tb"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="400dp"
+        android:layout_below="@id/tb"
+        android:layout_marginTop="20dp">
+
+        <github.orient33.demo.videodemo.MySurfaceView
+            android:id="@+id/msv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <include
+            layout="@layout/video_control"/>
+    </FrameLayout>
+</RelativeLayout>

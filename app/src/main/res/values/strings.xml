@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">VideoDemo</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="dialog_title">select one method</string>
+    <string name="float_window">Float Video</string>
+    <string name="title_activity_video_view">VideoViewActivity</string>
+    <string name="title_activity_surface_view">SurfaceViewActivity</string>
+    <string name="title_activity_texture_view">TextureViewActivity</string>
+</resources>
