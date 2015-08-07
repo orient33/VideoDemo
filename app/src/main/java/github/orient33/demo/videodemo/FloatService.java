@@ -23,7 +23,7 @@ public class FloatService extends Service {
     public static final String KEY_POSITION = "position";
     WindowManager mWindowManager;
     ViewGroup mFloatView;
-    VideoView mVideoView;
+    MyTextureView mVideoView;
     WindowManager.LayoutParams mParams;
     boolean mFloating;
 
@@ -40,7 +40,7 @@ public class FloatService extends Service {
         if (mWindowManager == null) {
             mFloatView = (ViewGroup) View.inflate(this, R.layout.video_view_float, null);
             mWindowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
-            mVideoView = (VideoView) mFloatView.findViewById(R.id.vv);
+            mVideoView = (MyTextureView) mFloatView.findViewById(R.id.vv);
             mParams = new WindowManager.LayoutParams(
                     WindowManager.LayoutParams.WRAP_CONTENT,
                     WindowManager.LayoutParams.WRAP_CONTENT,
@@ -51,24 +51,31 @@ public class FloatService extends Service {
             mParams.height = 400;
             mParams.x = 10;
             mParams.y = 50;
-            mFloatView.findViewById(R.id.down).setOnClickListener(new View.OnClickListener() {
+//            .setVisibility(View.GONE);
+            mFloatView.findViewById(R.id.player_close).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     stopSelf();
                 }
             });
-            mFloatView.setOnTouchListener(touchListener);
+            mFloatView.findViewById(R.id.player_resize).setOnTouchListener(touchListener2);
+            mFloatView.findViewById(R.id.player_float).setOnTouchListener(touchListener);
         }
-        if (!mFloating) {
-            String uri = intent.getStringExtra(KEY_VIDEO_URI);
-            int position = intent.getIntExtra(KEY_POSITION, 0);
-            addView(uri, position);
-        } else {
-            removeView();
+        if (intent != null) {
+            if (!mFloating) {
+                String uri = intent.getStringExtra(KEY_VIDEO_URI);
+                int position = intent.getIntExtra(KEY_POSITION, 0);
+                addView(uri, position);
+            } else {
+                removeView();
+            }
         }
         return super.onStartCommand(intent, flags, startId);
     }
 
+    /**
+     * 拖拽Video更换位置
+     */
     private final View.OnTouchListener touchListener = new View.OnTouchListener() {
         int lastX, lastY, x, y;
 
@@ -89,16 +96,46 @@ public class FloatService extends Service {
                     mWindowManager.updateViewLayout(mFloatView, mParams);
                     break;
             }
-            return false;
+            return true;
         }
     };
 
+    /**
+     * 拖拽修改Video的大小
+     */
+    private final View.OnTouchListener touchListener2 = new View.OnTouchListener() {
+        int lastX, lastY, moveX, moveY;
+
+        @Override
+        public boolean onTouch(View v, MotionEvent e) {
+            switch (MotionEvent.ACTION_MASK & e.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    lastX = (int) e.getRawX();
+                    lastY = (int) e.getRawY();
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                    moveX = (int) e.getRawX();
+                    moveY = (int) e.getRawY();
+                    mParams.width += moveX - lastX;
+                    mParams.height += moveY - lastY;
+                    lastX = moveX;
+                    lastY = moveY;
+                    mWindowManager.updateViewLayout(mFloatView, mParams);
+                    break;
+            }
+            return true;
+        }
+    };
+
+
     private void addView(String uriString, int position) {
         if (mFloating) return;
-        mWindowManager.addView(mFloatView, mParams);
         mVideoView.setVideoURI(Uri.parse(uriString));
         mVideoView.seekTo(position);
-        mVideoView.start();
+        mParams.width = mVideoView.getmVideoWidth();//VideoView不能获取Video的宽高度
+        mParams.height = mVideoView.getmVideoHeight();
+        mWindowManager.addView(mFloatView, mParams);
+//        mVideoView.start();
         mFloating = true;
     }
 

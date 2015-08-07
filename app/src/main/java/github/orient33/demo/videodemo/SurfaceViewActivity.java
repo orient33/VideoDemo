@@ -27,9 +27,9 @@ public class SurfaceViewActivity extends AppCompatActivity implements MediaPlaye
         Toolbar tb = (Toolbar) findViewById(R.id.tb);
         tb.setTitle(getClass().getSimpleName());
         setSupportActionBar(tb);
-        vv = (MySurfaceView) findViewById(R.id.msv);
-        controlDown = findViewById(R.id.down);
-        TouchListen tl = new TouchListen(controlDown);
+        vv = (MySurfaceView) findViewById(R.id.vv);
+//        controlDown = findViewById(R.id.down);
+//        TouchListen tl = new TouchListen(controlDown);
         vv.setOnPreparedListener(this);
         if (savedInstanceState != null) {
             position = savedInstanceState.getInt(KEY_POSITION);
@@ -38,7 +38,7 @@ public class SurfaceViewActivity extends AppCompatActivity implements MediaPlaye
             position = 0;
             uri = getIntent().getData();
         }
-        findViewById(R.id.float_view).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.player_float).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SurfaceViewActivity.this, FloatService.class);
@@ -65,10 +65,10 @@ public class SurfaceViewActivity extends AppCompatActivity implements MediaPlaye
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.down:
-                downVideo();
-        }
+//        switch (v.getId()) {
+//            case R.id.down:
+//                downVideo();
+//        }
     }
 
     @Override

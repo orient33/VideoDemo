@@ -20,9 +20,9 @@ public class TextureViewActivity extends AppCompatActivity {
         Toolbar tb = (Toolbar) findViewById(R.id.tb);
         tb.setTitle(getClass().getSimpleName());
         setSupportActionBar(tb);
-        vv = (MyTextureView) findViewById(R.id.mtv);
+        vv = (MyTextureView) findViewById(R.id.vv);
 
-        new TouchListen(findViewById(R.id.down));
+//        new TouchListen(findViewById(R.id.down));
         if (savedInstanceState != null) {
             position = savedInstanceState.getInt(KEY_POSITION);
             uri = savedInstanceState.getParcelable(KEY_URI);
@@ -31,13 +31,14 @@ public class TextureViewActivity extends AppCompatActivity {
             uri = getIntent().getData();
         }
 
-        findViewById(R.id.float_view).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.player_float).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TextureViewActivity.this, FloatService.class);
                 intent.putExtra(FloatService.KEY_VIDEO_URI, uri.toString());
                 intent.putExtra(FloatService.KEY_POSITION, vv.getCurrentPosition());
                 startService(intent);
+                finish();
             }
         });
     }

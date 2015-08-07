@@ -7,9 +7,9 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize" />
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="400dp"
         android:layout_below="@id/tb"
         android:layout_marginTop="20dp">
 
@@ -20,6 +20,6 @@
             />
         <include
             layout="@layout/video_control"/>
-    </FrameLayout>
+    </RelativeLayout>
 
 </RelativeLayout>

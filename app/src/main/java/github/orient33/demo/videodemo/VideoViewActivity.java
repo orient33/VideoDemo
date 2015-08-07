@@ -26,7 +26,7 @@ public class VideoViewActivity extends AppCompatActivity implements MediaPlayer.
         tb.setTitle(getClass().getSimpleName());
         setSupportActionBar(tb);
         vv = (VideoView) findViewById(R.id.vv);
-        new TouchListen(findViewById(R.id.down));
+//        new TouchListen(findViewById(R.id.down));
         vv.setMediaController(new MediaController(this));
         vv.setOnPreparedListener(this);
         if (savedInstanceState != null) {
@@ -36,13 +36,14 @@ public class VideoViewActivity extends AppCompatActivity implements MediaPlayer.
             position = 0;
             uri = getIntent().getData();
         }
-        findViewById(R.id.float_view).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.player_float).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(VideoViewActivity.this, FloatService.class);
                 intent.putExtra(FloatService.KEY_VIDEO_URI, uri.toString());
                 intent.putExtra(FloatService.KEY_POSITION, vv.getCurrentPosition());
                 startService(intent);
+                finish();
             }
         });
     }

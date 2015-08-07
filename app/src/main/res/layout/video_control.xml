@@ -1,26 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <ImageView
-        android:id="@+id/down"
-        android:layout_width="60dp"
-        android:layout_height="50dp"
-        android:src="@android:drawable/btn_dropdown"/>
 
-    <TextView
-        android:id="@+id/float_view"
-        android:minWidth="100dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:textColor="#f00"
-        android:text="@string/float_window"/>
-    <!--<SeekBar-->
-        <!--android:id="@+id/progress"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="10dp"-->
-        <!--android:progress="100"-->
-        <!--android:layout_alignParentBottom="true"/>-->
-</RelativeLayout>
+    <ImageView
+        android:id="@+id/player_float"
+        android:layout_width="@dimen/float_view_btn_size"
+        android:layout_height="@dimen/float_view_btn_size"
+        android:contentDescription="@null"
+        android:src="@drawable/player_float" />
+
+    <ImageView
+        android:id="@+id/player_close"
+        android:layout_width="@dimen/float_view_btn_size"
+        android:layout_height="@dimen/float_view_btn_size"
+        android:layout_alignEnd="@id/vv"
+        android:layout_alignRight="@id/vv"
+        android:contentDescription="@null"
+        android:src="@drawable/player_close" />
+
+
+    <ImageView
+        android:id="@+id/player_resize"
+        android:layout_width="@dimen/float_view_btn_size"
+        android:layout_height="@dimen/float_view_btn_size"
+        android:layout_alignBottom="@id/vv"
+        android:layout_alignEnd="@id/vv"
+        android:layout_alignRight="@id/vv"
+        android:contentDescription="@null"
+        android:src="@drawable/player_resize" />
+</merge>

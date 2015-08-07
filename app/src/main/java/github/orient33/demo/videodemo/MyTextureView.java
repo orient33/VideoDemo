@@ -193,6 +193,12 @@ public class MyTextureView extends TextureView implements TextureView.SurfaceTex
             mMediaPlayer.seekTo(msec);
         }
     }
+    public int getmVideoWidth(){
+        return mMediaPlayer!=null?mMediaPlayer.getVideoWidth():400;
+    }
+    public int getmVideoHeight(){
+        return mMediaPlayer!=null?mMediaPlayer.getVideoHeight():300;
+    }
     MediaPlayer.OnPreparedListener mPreparedListener = new MediaPlayer.OnPreparedListener() {
         @Override
         public void onPrepared(MediaPlayer mp) {

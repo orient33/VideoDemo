@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize" />
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="400dp"
@@ -15,10 +15,10 @@
         android:layout_marginTop="20dp">
 
         <github.orient33.demo.videodemo.MySurfaceView
-            android:id="@+id/msv"
+            android:id="@+id/vv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <include
             layout="@layout/video_control"/>
-    </FrameLayout>
+    </RelativeLayout>
 </RelativeLayout>
